@@ -1,0 +1,9 @@
+{
+  "patch": "nativechat-foundationmodels-compile-guards-v1",
+  "repository": "https://github.com/zaidmukaddam/swift-ai-sdk",
+  "revision": "d8d108ccf606a154647ef7eae948775a1e7aa969",
+  "original_source_git_blob": "58351d48e517d252e508608929048b724bc09301",
+  "patched_source_sha256": "2d22e80cad585a69f07bbbf75f88ad1ba23ec7ed0b96075dd5f1da155cb224d9",
+  "changed_file": "Sources/AI/Providers/FoundationModelsModel.swift",
+  "note": "Only two compiler-conditional guards and comments added. Upstream license preserved."
+}

@@ -1,0 +1,15 @@
+.DS_Store
+.build/
+.build-macos/
+.swiftpm/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcresult
+*.log
+.env
+.env.*
+# Keep Xcode's shared Package.resolved after the first successful resolution.
+
+# Local backups kept outside the repository.
+NativeChat-Hotfix-Backup/

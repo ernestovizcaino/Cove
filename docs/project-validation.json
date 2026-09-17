@@ -1,0 +1,15 @@
+{
+  "project_version": "0.2.0",
+  "app_swift_sources": 27,
+  "mac_test_files": 3,
+  "source_paths_exist": true,
+  "all_app_sources_in_compile_phase": true,
+  "object_references_valid": true,
+  "not_a_macos_build": true,
+  "swift_syntax_parsed_files": 30,
+  "plist_validation": true,
+  "scheme_workspace_xml_parsed": true,
+  "portable_tests_passed": 68,
+  "macOS_app_compiled": false,
+  "live_provider_tested": false
+}
