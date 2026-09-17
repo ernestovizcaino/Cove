@@ -1,0 +1,10 @@
+Cove bundles third-party code.
+
+swift-ai-sdk — Zaid Mukaddam — MIT License
+    Vendored under Vendor/swift-ai-sdk at revision
+    d8d108ccf606a154647ef7eae948775a1e7aa969, with the upstream LICENSE
+    preserved in place. The only change is two compiler-conditional guards,
+    recorded in Vendor/swift-ai-sdk/NATIVECHAT_COMPATIBILITY_PATCH.json.
+
+Textual — Guille Gonzalez — fetched by Swift Package Manager at revision
+    01b51875a5406eefc95f52a058cb059e7bc94dc4, not vendored.
