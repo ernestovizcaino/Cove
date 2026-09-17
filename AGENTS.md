@@ -47,6 +47,7 @@ Package.swift builds the portable domain, catalog transport and connection-edito
 ## Security and behavior
 
 - Keys belong in Keychain, scoped to connection ID AND canonical endpoint, not preferences or SwiftData.
+- The project signs ad hoc on purpose, so anyone can build it. That binds each Keychain item to the binary that wrote it: rebuilding invalidates stored keys, `save` replaces rather than updates to repair them, and Settings shows the affected connection. Do not "fix" this by moving keys out of the Keychain, and do not commit a DEVELOPMENT_TEAM.
 - Never embed, log, export, or silently reuse keys for another host.
 - SDK telemetry is explicitly disabled. Do not add an exporter or analytics service.
 - Public endpoints require HTTPS; HTTP is permitted only for local/private addresses.

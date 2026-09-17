@@ -73,6 +73,17 @@ Ollama usa `http://localhost:11434` como sugerencia inicial y `/api/chat` nativo
 
 Ninguna de las nuevas conexiones se ha probado con credenciales reales en este entorno. El código implementa las rutas, autenticación, formularios y adaptación al transporte; la prueba end-to-end en macOS sigue pendiente. Detalles de endpoints, fuentes, paginación y límites: **`docs/CONNECT.md`**.
 
+## Firma de código y el Keychain
+
+El proyecto se firma **ad hoc** (`CODE_SIGN_IDENTITY = "-"`), para que cualquiera pueda clonar y compilar sin una cuenta de Apple. Eso tiene una consecuencia concreta: el elemento del Keychain queda ligado al binario exacto que lo escribió, así que **cada recompilación invalida las claves guardadas**. La app lo detecta y lo muestra en Settings como *"Key unreadable — paste it again"*; volver a pegar la clave y guardar la repara, porque al guardar se borra y se vuelve a crear el elemento.
+
+Si vas a desarrollar a diario, usa una identidad estable y el problema desaparece:
+
+1. Xcode → Settings → Accounts → **+** → Apple ID (una cuenta gratuita basta).
+2. Target **Cove** → Signing & Capabilities → **Automatically manage signing** → Team: tu *Personal Team*.
+
+Con eso la app obtiene un Team ID y una `application-identifier`, las claves pasan a un grupo de acceso propio y sobreviven a las recompilaciones. No subas ese cambio al repositorio: dejaría de compilar para quien no tenga tu equipo.
+
 ## Historial, privacidad y límites
 
 Conversaciones, mensajes y conexiones no secretas se guardan con SwiftData, sin CloudKit. Las API keys se guardan en Keychain, asociadas a la conexión **y a su URL exacta normalizada**. Cambiar la URL no reutiliza automáticamente una clave guardada para otro endpoint.

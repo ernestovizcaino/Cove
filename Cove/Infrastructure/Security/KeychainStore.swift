@@ -24,6 +24,17 @@ struct KeychainStore {
         guard status == errSecSuccess, let data = result as? Data else { throw error(status) }
         return String(data: data, encoding: .utf8)
     }
+    /// True when a key exists for this connection but this build is not allowed to
+    /// read it. With ad-hoc signing the item is bound to the exact binary that wrote
+    /// it, so a rename or a rebuild can leave a key readable only to a signature that
+    /// no longer exists. Saving the key again repairs it.
+    func isUnreadable(_ connection: ProviderConnection) -> Bool {
+        guard var query = try? query(connection) else { return false }
+        query[kSecReturnData as String] = true
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        var result: CFTypeRef?
+        return SecItemCopyMatching(query as CFDictionary, &result) == errSecAuthFailed
+    }
     /// Replaces rather than updates. An item written by a previous signature can be
     /// deleted but not updated, so deleting first makes re-entering a key a reliable
     /// repair instead of failing with the same authorisation error.

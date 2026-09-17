@@ -46,6 +46,19 @@ struct ConnectionsView: View {
                                         .font(.system(size: 11)).foregroundStyle(.secondary).lineLimit(1)
                                     Text(connection.endpoint).font(.system(size: 10)).foregroundStyle(.tertiary)
                                         .lineLimit(1).truncationMode(.middle)
+                                    if store.keyNeedsReentry(connection) {
+                                        Button { sheet = .editor(connection) } label: {
+                                            HStack(spacing: 4) {
+                                                Image(systemName: "key.slash")
+                                                Text("Key unreadable — paste it again")
+                                                    .underline()
+                                            }
+                                            .font(.system(size: 10, weight: .medium))
+                                            .foregroundStyle(.orange)
+                                        }
+                                        .buttonStyle(.plain)
+                                        .help("This key was stored by an earlier build of the app. Saving it again repairs it.")
+                                    }
                                 }
                                 Spacer(minLength: 4)
                                 Button { sheet = .editor(connection) } label: { Image(systemName: "slider.horizontal.3") }

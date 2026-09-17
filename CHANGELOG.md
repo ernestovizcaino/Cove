@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+Keychain: saving a key now replaces the stored item instead of updating it. Ad-hoc signing binds an item to the exact binary that wrote it, so renaming or rebuilding the app left keys that could be deleted but never read or updated — `errSecAuthFailed (-25293)`, with an error message that blamed permissions. Settings now flags an affected connection with *"Key unreadable — paste it again"* and links straight to the editor, and the error text says what to do. README and AGENTS.md record why the project stays ad-hoc signed and how to opt into a stable identity locally.
+
+The default global shortcut is now **⇧⌘C**. It takes precedence over app-level ⇧⌘C bindings such as Finder's Go → Computer while Cove runs.
+
 Cove now runs as a menu bar app: no Dock icon and no ⌘Tab entry. `LSUIElement` starts it as an agent so the Dock icon never flashes at launch, and Settings has a **Show in the Dock** toggle that switches `NSApplication.activationPolicy` live. Turning the Dock icon off forces the menu bar item back on, so the app can never be left with no way to reach it.
 
 Menu bar item and a configurable global shortcut. The menu bar icon opens or hides the window, starts a new chat, opens history or settings, and quits; it can be turned off in Settings. **⇧⌘C** shows or hides Cove from any app, and the combination is re-recordable in Settings. Hiding orders the window out instead of closing it, so the draft, scroll position and an in-flight generation all survive. Registration uses Carbon's `RegisterEventHotKey`, which needs no Accessibility permission and works inside the App Sandbox; a combination another app already owns is refused with a message instead of failing silently, and a modifier-less key is rejected outright.

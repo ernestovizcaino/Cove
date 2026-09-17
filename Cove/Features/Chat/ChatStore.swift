@@ -456,6 +456,9 @@ import UniformTypeIdentifiers
         // Deliberately do not switch an affected chat to a different provider.
     }
     func key(for connection: ProviderConnection) throws -> String? { try credentials.read(connection) }
+    func keyNeedsReentry(_ connection: ProviderConnection) -> Bool {
+        connection.requiresKey && credentials.isUnreadable(connection)
+    }
     func exportCurrent(asJSON: Bool = false) {
         guard let current else { return }
         let panel = NSSavePanel()
